@@ -29,6 +29,7 @@ function getPhotos()
     usort($nom_photos, function ($a, $b) {
         return $b['date'] <=> $a['date'];
     });
+
     return $nom_photos;
 }
 
