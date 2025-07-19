@@ -1,22 +1,43 @@
+<?php
+
+
+
+$tmp = $_FILES["photo"]["tmp_name"];
+$name = $_FILES["photo"]["name"];
+$extension = explode(".", $name);
+$ext = $extension[1];
+$date = date("Ymd");
+$nom = $_POST["auteur"];
+$Fname = $nom . "-" . $date . "." . $ext;
+$upload = move_uploaded_file($tmp, "Photos/" . $Fname);
+
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
-    <title>Upload - MiniInsta</title>
+    <title>MiniInsta 📸</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <h1>Publier une photo</h1>
-    <form action="upload_script.php" method="POST" enctype="multipart/form-data">
-        <label for="author">Votre nom :</label>
-        <input type="text" name="author" id="author" required>
 
-        <label for="photo">Photo :</label>
-        <input type="file" name="photo" id="photo" accept="image/*" required>
+<body class="body2">
 
-        <button type="submit">Publier</button>
-    </form>
+    <?php if ($upload) { ?>
+        <H1>Upload réussi !</H1>
+        <img src="Photos/<?= $Fname ?>">
+    <?php } else { ?>
+        <p>Veuillez entrer une image</p>
+    <?php } ?>
 
-    <a href="index.php">← Retour à l'accueil</a>
 </body>
+
+<footer class="footer2">
+    <a href="index.php" class="btn">ACCUEIL</a>
+</footer>
+
 </html>
